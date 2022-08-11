@@ -1,0 +1,18 @@
+---
+- hosts: deploy
+  tasks:
+  - name: stop existing container
+    command: docker stop tomcatapp
+    ignore_errors: yes
+
+  - name: remove conatainer
+    command: docker rm tomcatapp
+    ignore_errors: yes
+
+  - name: remove image
+    command: docker rmi ishan68/tomcatimg:latest
+    ignore_errors: yes
+
+  - name: create container
+    command: docker run -d --name tomcatapp -p 8080:8080 ishan68/tomcatimg:latest
+
