@@ -1,0 +1,14 @@
+---
+- hosts: kuber
+  # i# become: true
+  user: ec2-user
+
+  tasks:
+    - name: deploy app on kuber
+      command:  kubectl apply -f /home/ec2-user/deployment.yml
+
+    - name: deploy service
+      command: kubectl apply  -f /home/ec2-user/service.yml
+
+    - name: update deployment with new pods if image updated in docker hub
+      command: kubectl rollout restart deployment.apps/tomcat-app
