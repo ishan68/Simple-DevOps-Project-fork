@@ -1,0 +1,13 @@
+---
+- hosts: web
+  tasks:
+    - name: create docker image
+      command: docker build -t tomcatimg .
+      args:
+        chdir: /home/ansadmin/
+
+    - name: create tag to push on dockerhub
+      command: docker tag tomcatimg ishan68/tomcatimg:latest
+
+    - name: push on dockerhub
+      command: docker push ishan68/tomcatimg:latest
